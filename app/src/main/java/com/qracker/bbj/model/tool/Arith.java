@@ -1,4 +1,4 @@
-package com.qracker.bbj.tool;
+package com.qracker.bbj.model.tool;
 
 import java.math.BigDecimal;
 /**

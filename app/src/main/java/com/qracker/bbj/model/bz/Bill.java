@@ -1,24 +1,18 @@
 package com.qracker.bbj.model.bz;
 
-import com.qracker.bbj.tool.Arith;
+import com.qracker.bbj.model.tool.Arith;
 import java.util.ArrayList;
 
 public class Bill {
     private int amount;
     private double scale = 0;
+    private double[] expends;
     private ArrayList<Member> members = new ArrayList<>();
 
     public Bill(double... expends) {
+        this.expends = expends;
         Member.nextId = 0;
         this.amount = expends.length;
-        double sum = 0;
-        for (int i = 0; i < expends.length; i++) {
-            sum += expends[i];
-        }
-        double average = adjustAverage(sum, amount);
-        for (int i = 0; i < expends.length; i++) {
-            expends[i] = Arith.sub(expends[i], average);
-        }
         for (double exp : expends
              ) {
             this.members.add(new Member(exp));
@@ -92,8 +86,13 @@ public class Bill {
         generateSolution(memberArrayList);
 
     }
-    public double adjustAverage(double sum, int amount) {
+
+    public double adjustAverage(double[] expends, int amount) {
         double sumUp,sumDown;
+        double sum = 0;
+        for (int i = 0; i < expends.length; i++) {
+            sum = Arith.add(sum, expends[i]);
+        }
         if((Arith.mul(sum, 100)) % amount == 0)
             return Arith.div(sum, amount, 2);
         else{
@@ -110,11 +109,20 @@ public class Bill {
     }
 
     public ArrayList<Transfer> getSolution() {
+        double average = adjustAverage(expends, amount);
+        for (Member m : members
+             ) {
+            m.setExpend(Arith.sub(m.getExpend(), average));
+        }
         this.generateSolution(this.members);
         ArrayList<Transfer> solution = new ArrayList<>();
         for (Member m : members
              ) {
             solution.addAll(m.getTransfers());
+        }
+        for (Member m : members
+             ) {
+            m.setExpend(expends[m.id]);
         }
         return solution;
     }

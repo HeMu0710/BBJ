@@ -1,6 +1,6 @@
 package com.qracker.bbj.model.bz;
 
-import com.qracker.bbj.tool.Arith;
+import com.qracker.bbj.model.tool.Arith;
 
 import java.util.ArrayList;
 
@@ -26,9 +26,13 @@ public class Member {
     }
 
     public void addTransfer(double transferMoney, Member payee) {
-        this.expend = Arith.round(Arith.add(this.expend, transferMoney), 2);
-        payee.expend = Arith.round(Arith.sub(payee.getExpend(),transferMoney), 2);
+        this.expend = Arith.add(this.expend, transferMoney);
+        payee.expend = Arith.sub(payee.getExpend(),transferMoney);
         this.transfers.add(new Transfer(this.id, payee.id,transferMoney));
+    }
+
+    public void setExpend(double expend) {
+        this.expend = expend;
     }
 
     public ArrayList<Transfer> getTransfers() {
