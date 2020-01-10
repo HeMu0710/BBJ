@@ -1,4 +1,4 @@
-package com.qracker.bbj.ui.notifications;
+package com.qracker.bbj.ui.aatool;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

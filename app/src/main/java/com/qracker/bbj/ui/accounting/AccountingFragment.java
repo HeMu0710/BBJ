@@ -1,4 +1,4 @@
-package com.qracker.bbj.ui.dashboard;
+package com.qracker.bbj.ui.accounting;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

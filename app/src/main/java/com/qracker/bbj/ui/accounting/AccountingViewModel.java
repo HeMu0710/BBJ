@@ -1,4 +1,4 @@
-package com.qracker.bbj.ui.dashboard;
+package com.qracker.bbj.ui.accounting;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

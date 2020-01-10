@@ -1,4 +1,4 @@
-package com.qracker.bbj.ui.notifications;
+package com.qracker.bbj.ui.aatool;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

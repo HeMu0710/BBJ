@@ -31,13 +31,13 @@
 
     <fragment
         android:id="@+id/navigation_accounting"
-        android:name="com.qracker.bbj.ui.dashboard.AccountingFragment"
+        android:name="com.qracker.bbj.ui.accounting.AccountingFragment"
         android:label="@string/title_accounting"
         tools:layout="@layout/fragment_accounting" />
 
     <fragment
         android:id="@+id/navigation_aatool"
-        android:name="com.qracker.bbj.ui.notifications.AAToolFragment"
+        android:name="com.qracker.bbj.ui.aatool.AAToolFragment"
         android:label="@string/title_aatool"
         tools:layout="@layout/fragment_aatool" >
 
