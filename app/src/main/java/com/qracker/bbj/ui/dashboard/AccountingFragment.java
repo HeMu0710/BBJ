@@ -1,4 +1,4 @@
-package com.qracker.bbj.ui.notifications;
+package com.qracker.bbj.ui.dashboard;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.qracker.bbj.R;
 
-public class NotificationsFragment extends Fragment {
+public class AccountingFragment extends Fragment {
 
-    private NotificationsViewModel notificationsViewModel;
+    private AccountingViewModel accountingViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        notificationsViewModel =
-                ViewModelProviders.of(this).get(NotificationsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_notifications, container, false);
-        final TextView textView = root.findViewById(R.id.text_notifications);
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        accountingViewModel =
+                ViewModelProviders.of(this).get(AccountingViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_accounting, container, false);
+        final TextView textView = root.findViewById(R.id.text_accounting);
+        accountingViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

@@ -16,6 +16,13 @@ public class Member {
     }
 
     private int assignId() {
+        /**
+        * @Description: 分发ID
+        * @Param: []
+        * @return: int
+        * @Author: HeMu-qracker
+        * @Date: 2020/1/10
+        */
         int r = nextId;
         nextId++;
         return r;
@@ -26,6 +33,13 @@ public class Member {
     }
 
     public void addTransfer(double transferMoney, Member payee) {
+        /**
+        * @Description: 添加转账记录，并对双方支出进行处理
+        * @Param: [transferMoney, payee]
+        * @return: void
+        * @Author: HeMu-qracker
+        * @Date: 2020/1/10
+        */
         this.expend = Arith.add(this.expend, transferMoney);
         payee.expend = Arith.sub(payee.getExpend(),transferMoney);
         this.transfers.add(new Transfer(this.id, payee.id,transferMoney));

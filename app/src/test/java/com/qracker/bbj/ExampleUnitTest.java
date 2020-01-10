@@ -21,9 +21,10 @@ public class ExampleUnitTest {
 //    }
     @Test
     public void test() {
-        Bill bill = new Bill(0, 500, 901, 421, 152);
+        Bill bill = new Bill(4);
+        bill.addExpend(0, 100);
+        bill.addExpend(1, 20);
+        bill.addExpend(3, 60);
         System.out.println(bill.getSolution());
-        Bill bill1 = new Bill(51, 987, 517, 84);
-        System.out.println(bill1.getSolution());
     }
 }

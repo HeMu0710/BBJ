@@ -11,6 +11,13 @@ public class AccountingSystem {
     }
 
     public static AccountingSystem getInstance() {
+        /**
+        * @Description: AccountingSystem应实现单例模式，此方法为获取这个单例对象。
+        * @Param: []
+        * @return: com.qracker.bbj.model.bc.AccountingSystem
+        * @Author: HeMu-qracker
+        * @Date: 2020/1/10
+        */
         return instance;
     }
 
@@ -19,10 +26,24 @@ public class AccountingSystem {
     }
 
     public void addEvent(MoneyEvent moneyEvent) {
+        /**
+        * @Description: 添加一笔记账
+        * @Param: [moneyEvent]
+        * @return: void
+        * @Author: HeMu-qracker
+        * @Date: 2020/1/10
+        */
         this.events.add(moneyEvent);
     }
 
     public double getAllIncome() {
+        /**
+        * @Description: 获取总收入
+        * @Param: []
+        * @return: double
+        * @Author: HeMu-qracker
+        * @Date: 2020/1/10
+        */
         double allIncome = 0;
         for (MoneyEvent me : events
              ) {
@@ -33,6 +54,13 @@ public class AccountingSystem {
     }
 
     public double getAllExpend() {
+        /**
+        * @Description: 获取总支出
+        * @Param: []
+        * @return: double
+        * @Author: HeMu-qracker
+        * @Date: 2020/1/10
+        */
         double allExpand = 0;
         for (MoneyEvent me : events
              ) {
@@ -42,7 +70,14 @@ public class AccountingSystem {
         return allExpand;
     }
 
-    public double getNet() {
+    public double getSurplus() {
+        /**
+        * @Description: 获取结余，即收入减支出
+        * @Param: []
+        * @return: double
+        * @Author: HeMu-qracker
+        * @Date: 2020/1/10
+        */
         return Arith.sub(getAllIncome(), getAllExpend());
     }
 }

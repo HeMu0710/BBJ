@@ -9,7 +9,15 @@ public class Bill {
     private double[] expends;
     private ArrayList<Member> members = new ArrayList<>();
 
+
     public Bill(double... expends) {
+        /**
+        * @Description: 新建均摊账单，传参为任意个数double类型，初始化members
+        * @Param: [expends]
+        * @return:
+        * @Author: HeMu-qracker
+        * @Date: 2020/1/11
+        */
         this.expends = expends;
         Member.nextId = 0;
         this.amount = expends.length;
@@ -20,11 +28,41 @@ public class Bill {
         Member.nextId = 0;
     }
 
+    public Bill(int amount) {
+        /**
+        * @Description: 无参构造器，针对不同时，累计的均摊过程，例如寝室均摊等等
+        * @Param: [amount]
+        * @Author: HeMu-qracker
+        * @Date: 2020/1/11
+        */
+        this.amount = amount;
+        Member.nextId = 0;
+        for (int i = 0; i < amount; i++) {
+            members.add(new Member(0));
+        }
+        Member.nextId = 0;
+        expends = new double[amount];
+    }
+
+    public void addExpend(int id, double expend) {
+        this.expends[id] = Arith.add(expend, expends[id]);
+        members.get(id).setExpend(this.expends[id]);
+    }
+
     public int getAmount() {
         return this.amount;
     }
 
     public void generateSolution(ArrayList<Member> memberArrayList) {
+        /**
+        * @Description: 使用递归生成解决方案，传入的memberArrayList事先被遍历减去了一个average，让负的最多的
+        * 成员去和正的最少的成员相抵消，生成一笔转账，并处理数额，继续寻找下一个正的最少的，如果不足则全部转出。
+        * 递归出口为所有成员的expend的绝对值都小于scala
+        * @Param: [memberArrayList]
+        * @return: void
+        * @Author: HeMu-qracker
+        * @Date: 2020/1/10
+        */
         boolean isFinish = true;
         for (Member m : memberArrayList //跳出递归条件
              ) {
@@ -88,6 +126,13 @@ public class Bill {
     }
 
     public double adjustAverage(double[] expends, int amount) {
+        /**
+        * @Description: 获取调整至不会出现无限循环小数后的平均数，精度即为调整次数*0.01
+        * @Param: [expends, amount]
+        * @return: double
+        * @Author: HeMu-qracker
+        * @Date: 2020/1/10
+        */
         double sumUp,sumDown;
         double sum = 0;
         for (int i = 0; i < expends.length; i++) {
@@ -109,6 +154,13 @@ public class Bill {
     }
 
     public ArrayList<Transfer> getSolution() {
+        /**
+        * @Description: 获取解决方案，并将所有成员的转账记录合并成一个list然后return
+        * @Param: []
+        * @return: java.util.ArrayList<com.qracker.bbj.model.bz.Transfer>
+        * @Author: HeMu-qracker
+        * @Date: 2020/1/10
+        */
         double average = adjustAverage(expends, amount);
         for (Member m : members
              ) {
