@@ -7,6 +7,8 @@ import com.qracker.bbj.model.bc.AccountingSystem;
 import com.qracker.bbj.model.bc.MoneyEvent;
 import com.qracker.bbj.model.bz.Bill;
 
+import java.util.Date;
+
 import static org.junit.Assert.*;
 
 /**
@@ -21,10 +23,7 @@ public class ExampleUnitTest {
 //    }
     @Test
     public void test() {
-        Bill bill = new Bill(4);
-        bill.addExpend(0, 100);
-        bill.addExpend(1, 20);
-        bill.addExpend(3, 60);
-        System.out.println(bill.getSolution());
+        Date date = new Date();
+        System.out.println((date.getYear() + 1900) + "/" + (date.getMonth() + 1) + "/" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes());
     }
 }

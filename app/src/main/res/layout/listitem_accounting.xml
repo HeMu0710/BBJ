@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:LinearLayoutandroid="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        app:cardCornerRadius="10sp"
+        android:layout_height="68dp"
+        android:layout_margin="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/itemIcon_accounting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:src="@drawable/baseline_attach_money_black_48" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="8dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/itemDetail_accounting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:maxLines="2"
+                    android:layout_gravity="center_vertical"
+                    android:text="Material Design引入了三维中z轴的概念"
+                    android:textColor="#DB000000"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/itemDate_accounting"
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"
+                    android:text="2020/1/11 19:51"
+                    android:textColor="#C7000000"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/itemMoney_accounting"
+                android:layout_width="128dp"
+                android:layout_height="match_parent"
+                android:layout_margin="6dp"
+                android:gravity="center|end"
+                android:text="-8900.00"
+                android:textColor="#000000"
+                android:textSize="30sp" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

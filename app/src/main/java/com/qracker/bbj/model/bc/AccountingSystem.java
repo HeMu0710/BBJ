@@ -36,10 +36,10 @@ public class AccountingSystem {
         this.events.add(moneyEvent);
     }
 
-    public double getAllIncome() {
+    public double getMonthlyIncome(int month) {
         /**
-        * @Description: 获取总收入
-        * @Param: []
+        * @Description: 获取特定月份总收入
+        * @Param: [month]
         * @return: double
         * @Author: HeMu-qracker
         * @Date: 2020/1/10
@@ -47,16 +47,16 @@ public class AccountingSystem {
         double allIncome = 0;
         for (MoneyEvent me : events
              ) {
-            if (!me.isOut())
+            if (!me.isOut() && me.getMonth() == month)
                 allIncome = Arith.add(allIncome, me.getMoney());
         }
         return allIncome;
     }
 
-    public double getAllExpend() {
+    public double getMonthlyExpend(int month) {
         /**
-        * @Description: 获取总支出
-        * @Param: []
+        * @Description: 获取特定月份总支出
+        * @Param: [month]
         * @return: double
         * @Author: HeMu-qracker
         * @Date: 2020/1/10
@@ -64,20 +64,20 @@ public class AccountingSystem {
         double allExpand = 0;
         for (MoneyEvent me : events
              ) {
-            if (me.isOut())
+            if (me.isOut() && me.getMonth() == month)
                 allExpand = Arith.add(allExpand, me.getMoney());
         }
         return allExpand;
     }
 
-    public double getSurplus() {
+    public double getSurplus(int month) {
         /**
-        * @Description: 获取结余，即收入减支出
-        * @Param: []
+        * @Description: 获取特定月份结余，即收入减支出
+        * @Param: [month]
         * @return: double
         * @Author: HeMu-qracker
         * @Date: 2020/1/10
         */
-        return Arith.sub(getAllIncome(), getAllExpend());
+        return Arith.sub(getMonthlyIncome(month), getMonthlyExpend(month));
     }
 }

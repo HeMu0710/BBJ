@@ -1,30 +1,22 @@
 package com.qracker.bbj.model.bc;
 
+import androidx.lifecycle.LiveData;
+
+import java.util.Date;
+
 public class MoneyEvent {
     private double money;
     private boolean isOut;   //true代表支出，false代表收入
     private String type;
-    private String description;
+    private String comment;
+    private Date date;
 
-    public MoneyEvent(double money, boolean isOut, String type, String description) {
+    public MoneyEvent(double money, boolean isOut, String type, String comment, Date date) {
         this.money = money;
         this.isOut = isOut;
         this.type = type;
-        this.description = description;
-    }
-
-    public MoneyEvent(double money, boolean isOut, String type) {
-        this.money = money;
-        this.isOut = isOut;
-        this.type = type;
-        this.description = "及时行乐";
-    }
-
-    public MoneyEvent(double money, boolean isOut) {
-        this.money = money;
-        this.isOut = isOut;
-        this.type = "生活";
-        this.description = "及时行乐";
+        this.comment = comment;
+        this.date = date;
     }
 
     public double getMoney() {
@@ -39,8 +31,16 @@ public class MoneyEvent {
         return type;
     }
 
-    public String getDescription() {
-        return description;
+    public String getComment() {
+        return comment;
+    }
+
+    public String getDate() {
+        return (date.getYear() + 1900) + "/" + (date.getMonth() + 1) + "/" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
+    }
+
+    public int getMonth() {
+        return this.date.getMonth();
     }
 
     public void setMoney(double money) {
@@ -55,7 +55,13 @@ public class MoneyEvent {
         this.type = type;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public void setDate(int year, int monthOfYear, int dayOfMonth) {
+        this.date.setYear(year);
+        this.date.setMonth(monthOfYear);
+        this.date.setDate(dayOfMonth);
     }
 }

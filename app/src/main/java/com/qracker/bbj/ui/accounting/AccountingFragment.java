@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,15 +24,12 @@ public class AccountingFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         accountingViewModel =
-                ViewModelProviders.of(this).get(AccountingViewModel.class);
+                ViewModelProviders.of(getActivity()).get(AccountingViewModel.class);
         View root = inflater.inflate(R.layout.fragment_accounting, container, false);
-        final TextView textView = root.findViewById(R.id.text_accounting);
-        accountingViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        ListView listView = root.findViewById(R.id.listView_accounting);
+        Adapter adapter = new AccountingAdapter(root.getContext(), R.layout.listitem_accounting,
+                accountingViewModel.getAccountingList());
+        listView.setAdapter((ListAdapter) adapter);
         return root;
     }
 }
