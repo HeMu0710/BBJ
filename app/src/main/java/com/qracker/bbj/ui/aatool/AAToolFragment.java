@@ -22,7 +22,7 @@ public class AAToolFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         AAtoolViewModel =
-                ViewModelProviders.of(this).get(AAtoolViewModel.class);
+                ViewModelProviders.of(getActivity()).get(AAtoolViewModel.class);
         View root = inflater.inflate(R.layout.fragment_aatool, container, false);
         ListView billListView = root.findViewById(R.id.listView_aaTool);
         BillListAdapter adapter = new BillListAdapter(root.getContext(),

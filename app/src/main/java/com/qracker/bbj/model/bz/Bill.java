@@ -185,6 +185,10 @@ public class Bill {
         return comment;
     }
 
+    public ArrayList<Member> getMembers() {
+        return this.members;
+    }
+
     public void setComment(String newComment) {
         this.comment = newComment;
     }

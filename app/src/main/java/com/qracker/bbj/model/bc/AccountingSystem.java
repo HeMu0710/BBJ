@@ -1,9 +1,10 @@
 package com.qracker.bbj.model.bc;
 
 import java.util.ArrayList;
-import com.qracker.bbj.model.tool.Arith;
 
-public class AccountingSystem {
+import com.qracker.bbj.model.tool.*;
+
+public class AccountingSystem implements AddInFront<MoneyEvent> {
     private static AccountingSystem instance = new AccountingSystem();
     private ArrayList<MoneyEvent> events = new ArrayList<>();
 
@@ -27,13 +28,13 @@ public class AccountingSystem {
 
     public void addEvent(MoneyEvent moneyEvent) {
         /**
-        * @Description: 添加一笔记账
+        * @Description: 添加一笔记账至首位
         * @Param: [moneyEvent]
         * @return: void
         * @Author: HeMu-qracker
         * @Date: 2020/1/10
         */
-        this.events.add(moneyEvent);
+        this.events = addInFront(this.events, moneyEvent);
     }
 
     public double getMonthlyIncome(int month) {
@@ -79,5 +80,19 @@ public class AccountingSystem {
         * @Date: 2020/1/10
         */
         return Arith.sub(getMonthlyIncome(month), getMonthlyExpend(month));
+    }
+
+    public ArrayList<MoneyEvent> addInFront(ArrayList<MoneyEvent> moneyEvents, MoneyEvent moneyEventToAdd) {
+        /**
+        * @Description: 继承自自定义接口AddInFront,实现将对象添加到list的首位
+        * @Param: [moneyEvents, moneyEventToAdd]
+        * @return: java.util.ArrayList<com.qracker.bbj.model.bc.MoneyEvent>
+        * @Author: HeMu-qracker
+        * @Date: 2020/1/13
+        */
+        ArrayList<MoneyEvent> newEvents = new ArrayList<>();
+        newEvents.add(moneyEventToAdd);
+        newEvents.addAll(moneyEvents);
+        return newEvents;
     }
 }
