@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -27,9 +28,10 @@ public class AccountingFragment extends Fragment {
                 ViewModelProviders.of(getActivity()).get(AccountingViewModel.class);
         View root = inflater.inflate(R.layout.fragment_accounting, container, false);
         ListView listView = root.findViewById(R.id.listView_accounting);
-        Adapter adapter = new AccountingAdapter(root.getContext(), R.layout.listitem_accounting,
+        AccountingAdapter adapter = new AccountingAdapter(root.getContext(), R.layout.listitem_accounting,
                 accountingViewModel.getAccountingList());
         listView.setAdapter((ListAdapter) adapter);
+        adapter.notifyDataSetChanged();
         return root;
     }
 }
