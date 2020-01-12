@@ -4,20 +4,22 @@ import com.qracker.bbj.model.tool.Arith;
 import java.util.ArrayList;
 
 public class Bill {
+    private String comment;
     private int amount;
     private double scale = 0;
     private double[] expends;
     private ArrayList<Member> members = new ArrayList<>();
 
 
-    public Bill(double... expends) {
+    public Bill(String comment, double... expends) {
         /**
         * @Description: 新建均摊账单，传参为任意个数double类型，初始化members
-        * @Param: [expends]
+        * @Param: [comment,expends]
         * @return:
         * @Author: HeMu-qracker
         * @Date: 2020/1/11
         */
+        this.comment = comment;
         this.expends = expends;
         Member.nextId = 0;
         this.amount = expends.length;
@@ -181,5 +183,13 @@ public class Bill {
 
     public double getScale() {
         return this.scale;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String newComment) {
+        this.comment = newComment;
     }
 }
