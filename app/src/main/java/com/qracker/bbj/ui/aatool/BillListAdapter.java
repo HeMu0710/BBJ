@@ -35,7 +35,7 @@ public class BillListAdapter extends ArrayAdapter<Bill> {
         Bill bill = getItem(position);
         View view = LayoutInflater.from(getContext()).inflate(newResourceId, parent, false);
         TextView itemTitle = view.findViewById(R.id.itemTitle_aatool);
-        itemTitle.setText(bill.getAmount() + "人账单");
+        itemTitle.setText(bill.getComment());
         return view;
     }
 }

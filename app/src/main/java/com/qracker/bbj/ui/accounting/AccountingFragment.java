@@ -30,7 +30,7 @@ public class AccountingFragment extends Fragment {
         ListView listView = root.findViewById(R.id.listView_accounting);
         AccountingAdapter adapter = new AccountingAdapter(root.getContext(), R.layout.listitem_accounting,
                 accountingViewModel.getAccountingList());
-        listView.setAdapter((ListAdapter) adapter);
+        listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         return root;
     }

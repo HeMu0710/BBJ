@@ -15,7 +15,7 @@ public class BillSystem {
         bills = new ArrayList<>();
     }
 
-    public BillSystem getInstance() {
+    public static BillSystem getInstance() {
         /**
         * @Description: 实现单例模式，获取该单例对象
         * @Param: []
@@ -23,7 +23,7 @@ public class BillSystem {
         * @Author: HeMu-qracker
         * @Date: 2020/1/12
         */
-        return this.instance;
+        return instance;
     }
 
     public ArrayList<Bill> getBills() {
