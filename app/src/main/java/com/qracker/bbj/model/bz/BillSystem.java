@@ -30,7 +30,7 @@ public class BillSystem {
         return bills;
     }
 
-    public void addBill(double... expends) {
-        this.bills.add(new Bill(expends));
+    public void addBill(String comment) {
+        this.bills.add(new Bill(comment));
     }
 }

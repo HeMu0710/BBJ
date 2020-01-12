@@ -1,12 +1,12 @@
 package com.qracker.bbj.model.bz;
 
 public class Transfer {
-    private int payerId, payeeId;
+    private String payerName, payeeName;
     private double transferMoney;
 
-    public Transfer(int payerId, int payeeId, double transferMoney) {
-        this.payerId = payerId;
-        this.payeeId = payeeId;
+    public Transfer(String payerName, String payeeName, double transferMoney) {
+        this.payerName = payerName;
+        this.payeeName= payeeName;
         this.transferMoney = transferMoney;
     }
 
@@ -14,16 +14,16 @@ public class Transfer {
         return transferMoney;
     }
 
-    public int getPayeeId() {
-        return payeeId;
+    public String getPayeeId() {
+        return payeeName;
     }
 
-    public int getPayerId() {
-        return payerId;
+    public String getPayerId() {
+        return payerName;
     }
 
     @Override
     public String toString() {
-        return payerId + "->" + payeeId + ":" + this.transferMoney;
+        return payerName + "转给" + payeeName + ":" + this.transferMoney + "RMB";
     }
 }

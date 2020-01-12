@@ -5,27 +5,20 @@ import com.qracker.bbj.model.tool.Arith;
 import java.util.ArrayList;
 
 public class Member {
-    public static int nextId;
-    public final int id = assignId();
+    private int id;
+    private String name;
     private double expend;
     private ArrayList<Transfer> transfers = new ArrayList<>();
 
 
-    public Member(double expend) {
+    public Member(String name, double expend) {
+        this.name = name;
         this.expend = expend;
     }
 
-    private int assignId() {
-        /**
-        * @Description: 分发ID
-        * @Param: []
-        * @return: int
-        * @Author: HeMu-qracker
-        * @Date: 2020/1/10
-        */
-        int r = nextId;
-        nextId++;
-        return r;
+    public Member(String name) {
+        this.name = name;
+        this.expend = 0;
     }
 
     public double getExpend() {
@@ -42,14 +35,26 @@ public class Member {
         */
         this.expend = Arith.add(this.expend, transferMoney);
         payee.expend = Arith.sub(payee.getExpend(),transferMoney);
-        this.transfers.add(new Transfer(this.id, payee.id,transferMoney));
+        this.transfers.add(new Transfer(this.name, payee.name,transferMoney));
     }
 
     public void setExpend(double expend) {
         this.expend = expend;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     public ArrayList<Transfer> getTransfers() {
         return this.transfers;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return this.id;
     }
 }

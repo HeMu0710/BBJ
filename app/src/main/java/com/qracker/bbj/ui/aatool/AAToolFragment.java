@@ -23,13 +23,6 @@ public class AAToolFragment extends Fragment {
         AAtoolViewModel =
                 ViewModelProviders.of(this).get(AAtoolViewModel.class);
         View root = inflater.inflate(R.layout.fragment_aatool, container, false);
-        final TextView textView = root.findViewById(R.id.text_aatool);
-        AAtoolViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
         return root;
     }
 }

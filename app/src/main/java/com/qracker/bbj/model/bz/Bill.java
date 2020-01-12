@@ -5,50 +5,43 @@ import java.util.ArrayList;
 
 public class Bill {
     private String comment;
-    private int amount;
+    private int amount = 0;
     private double scale = 0;
     private double[] expends;
     private ArrayList<Member> members = new ArrayList<>();
+    private boolean isFinished;
 
 
-    public Bill(String comment, double... expends) {
+    public Bill(String comment) {
         /**
-        * @Description: 新建均摊账单，传参为任意个数double类型，初始化members
+        * @Description: 新建均摊账单
         * @Param: [comment,expends]
         * @return:
         * @Author: HeMu-qracker
         * @Date: 2020/1/11
         */
         this.comment = comment;
-        this.expends = expends;
-        Member.nextId = 0;
-        this.amount = expends.length;
-        for (double exp : expends
-             ) {
-            this.members.add(new Member(exp));
-        }
-        Member.nextId = 0;
+        this.isFinished = false;
+        expends = new double[20];
     }
 
-    public Bill(int amount) {
-        /**
-        * @Description: 无参构造器，针对不同时，累计的均摊过程，例如寝室均摊等等
-        * @Param: [amount]
-        * @Author: HeMu-qracker
-        * @Date: 2020/1/11
-        */
-        this.amount = amount;
-        Member.nextId = 0;
-        for (int i = 0; i < amount; i++) {
-            members.add(new Member(0));
-        }
-        Member.nextId = 0;
-        expends = new double[amount];
+    public void addMember(String name, double expend) {
+        Member member = new Member(name, expend);
+        member.setId(amount);
+        members.add(member);
+        amount ++;
+        expends[member.getId()] = expend;
     }
 
-    public void addExpend(int id, double expend) {
-        this.expends[id] = Arith.add(expend, expends[id]);
-        members.get(id).setExpend(this.expends[id]);
+    public void addExpend(String name, double expendToAdd) {
+        Member temp;
+        for (int i = 0; i < members.size(); i++) {
+            temp = members.get(i);
+            if(temp.getName().equals(name)) {
+                expends[i] = Arith.add(temp.getExpend(), expendToAdd);
+                temp.setExpend(expends[i]);
+            }
+        }
     }
 
     public int getAmount() {
@@ -74,7 +67,7 @@ public class Bill {
         }
         if(isFinish)
             return;
-        Member min = new Member(0);
+        Member min = new Member(" ");
         for (Member m : memberArrayList
              ) {
             if(Math.abs(m.getExpend()) <= scale && Math.abs(m.getExpend()) == 0)
@@ -100,7 +93,7 @@ public class Bill {
             if(notZero == 1){
                 break;
             }
-            Member minPositive = new Member(0);
+            Member minPositive = new Member(" ");
             for (Member m : memberArrayList
             ) {
                 if(m.getExpend() < scale || m.getExpend() == 0)
@@ -163,12 +156,15 @@ public class Bill {
         * @Author: HeMu-qracker
         * @Date: 2020/1/10
         */
-        double average = adjustAverage(expends, amount);
-        for (Member m : members
-             ) {
-            m.setExpend(Arith.sub(m.getExpend(), average));
+        if(!isFinished) {
+            double average = adjustAverage(expends, amount);
+            for (Member m : members
+            ) {
+                m.setExpend(Arith.sub(m.getExpend(), average));
+            }
+            this.generateSolution(this.members);
+            this.isFinished = true;
         }
-        this.generateSolution(this.members);
         ArrayList<Transfer> solution = new ArrayList<>();
         for (Member m : members
              ) {
@@ -176,7 +172,7 @@ public class Bill {
         }
         for (Member m : members
              ) {
-            m.setExpend(expends[m.id]);
+            m.setExpend(expends[m.getId()]);
         }
         return solution;
     }
@@ -191,5 +187,9 @@ public class Bill {
 
     public void setComment(String newComment) {
         this.comment = newComment;
+    }
+
+    public boolean isFinished() {
+        return isFinished;
     }
 }
