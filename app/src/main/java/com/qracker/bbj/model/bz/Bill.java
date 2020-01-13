@@ -196,4 +196,24 @@ public class Bill {
     public boolean isFinished() {
         return isFinished;
     }
+
+    public double getSum() {
+        /**
+        * @Description: 获取账单总支出
+        * @Param: []
+        * @return: double
+        * @Author: HeMu-qracker
+        * @Date: 2020/1/13
+        */
+        double sum = 0;
+        for (double e : this.expends
+             ) {
+            sum = Arith.add(sum, e);
+        }
+        return sum;
+    }
+
+    public double getAverageExpend() {
+        return Arith.div(getSum(), this.amount, 2);
+    }
 }

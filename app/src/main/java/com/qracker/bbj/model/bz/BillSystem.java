@@ -1,5 +1,7 @@
 package com.qracker.bbj.model.bz;
 
+import com.qracker.bbj.model.tool.AddInFront;
+
 import java.util.ArrayList;
 
 /**
@@ -8,7 +10,7 @@ import java.util.ArrayList;
  * @author: HeMu-qracker
  * @create: 2020-01-12 23:21
  **/
-public class BillSystem {
+public class BillSystem implements AddInFront<Bill> {
     private ArrayList<Bill> bills;
     private static BillSystem instance = new BillSystem();
     public BillSystem() {
@@ -31,6 +33,18 @@ public class BillSystem {
     }
 
     public void addBill(String comment) {
-        this.bills.add(new Bill(comment));
+        this.bills = addInFront(this.bills,new Bill(comment));
+    }
+
+    public void addBill(Bill bill) {
+        this.bills = addInFront(this.bills,bill);
+    }
+
+    @Override
+    public ArrayList<Bill> addInFront(ArrayList<Bill> arrayList, Bill bill) {
+        ArrayList<Bill> newArrayList = new ArrayList<>();
+        newArrayList.add(bill);
+        newArrayList.addAll(arrayList);
+        return newArrayList;
     }
 }

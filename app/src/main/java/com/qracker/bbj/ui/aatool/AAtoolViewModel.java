@@ -18,24 +18,20 @@ public class AAtoolViewModel extends ViewModel {
         Bill bill = new Bill("寝室均摊账本");
         bill.addMember("何牧",50);
         bill.addMember("梁理维",40);
-        bill.addMember("王泳淇",80);
-        bill.addMember("唐铭聪",5);
         bill.addExpend("何牧",50);
         Bill bill1 = new Bill("1.7日聚会");
-        bill1.addMember("何牧",50);
         bill1.addMember("梁理维",40);
         bill1.addMember("王泳淇",80);
         bill1.addMember("唐铭聪",5);
-        bill1.addExpend("何牧",50);
         Bill bill2 = new Bill("1.1日聚会");
         bill2.addMember("何牧",50);
         bill2.addMember("梁理维",40);
         bill2.addMember("王泳淇",80);
         bill2.addMember("唐铭聪",5);
         bill2.addExpend("何牧",50);
-        billSystem.getBills().add(bill);
-        billSystem.getBills().add(bill1);
-        billSystem.getBills().add(bill2);
+        billSystem.addBill(bill);
+        billSystem.addBill(bill1);
+        billSystem.addBill(bill2);
     }
 
     public ArrayList<Bill> getBillList() {

@@ -10,8 +10,7 @@
         android:layout_height="match_parent"
         android:layout_marginVertical="4dp"
         android:layout_marginHorizontal="8dp"
-        app:cardCornerRadius="8dp"
-        >
+        app:cardCornerRadius="8dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -51,16 +50,84 @@
                         android:gravity="center_vertical"
                         android:textColor="#DE000000"
                         android:textSize="16sp"/>
-
                 </LinearLayout>
 
-
-                <ListView
-                    android:id="@+id/listView_bill_memberList"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scrollbars="none"/>
+                    android:orientation="horizontal">
 
+                    <ListView
+                        android:id="@+id/listView_bill_memberList"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none"
+                        android:divider="@null"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"></LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="64dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="32dp"
+                                android:layout_marginLeft="8dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="总支出："
+                                    android:gravity="center_vertical"
+                                    android:textColor="#DE000000"/>
+
+                                <TextView
+                                    android:id="@+id/itemSumExpend_aaTool"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical|end"
+                                    android:text="512.0 RMB"
+                                    android:textColor="#DE000000" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="32dp"
+                                android:orientation="horizontal"
+                                android:layout_marginLeft="8dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="平均支出："
+                                    android:gravity="center_vertical"
+                                    android:textColor="#DE000000"/>
+
+                                <TextView
+                                    android:id="@+id/itemAverageExpend_aaTool"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical|end"
+                                    android:textColor="#DE000000"
+                                    android:text="53.50 RMB"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -71,29 +138,25 @@
 
                 <Button
                     android:id="@+id/button_aaTool_billCheck"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="44dp"
+                    android:layout_height="40dp"
+                    android:layout_marginHorizontal="8dp"
                     style="?android:attr/borderlessButtonStyle"
                     android:text="查看"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textColor="#DE000000"
+                    android:gravity="right|center_vertical"
                     android:background="#FFFFFF" />
                 <Button
                     android:id="@+id/button_aaTool_billEdit"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="44dp"
+                    android:layout_height="40dp"
                     style="?android:attr/borderlessButtonStyle"
                     android:text="编辑"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textColor="#DE000000"
                     android:background="#ffffff"/>
-
             </LinearLayout>
-
-
         </LinearLayout>
-
-
     </com.google.android.material.card.MaterialCardView>
-
 </LinearLayout>

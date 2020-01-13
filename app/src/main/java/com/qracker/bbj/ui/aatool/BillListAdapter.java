@@ -41,6 +41,8 @@ public class BillListAdapter extends ArrayAdapter<Bill> {
         View view = LayoutInflater.from(getContext()).inflate(newResourceId, parent, false);
         TextView itemTitle = view.findViewById(R.id.itemTitle_aatool);
         TextView itemStatus = view.findViewById(R.id.itemStatus_aatool);
+        TextView itemSumExpend = view.findViewById(R.id.itemSumExpend_aaTool);
+        TextView itemAverageExpend = view.findViewById(R.id.itemAverageExpend_aaTool);
         ListView memberListView = view.findViewById(R.id.listView_bill_memberList);
         MemberListAdapter adapter = new MemberListAdapter(getContext(),
                 R.layout.listitem_bill_memberlist, bill.getMembers());
@@ -57,6 +59,8 @@ public class BillListAdapter extends ArrayAdapter<Bill> {
             itemStatus.setText("已结清");
         else
             itemStatus.setText("未结清");
+        itemSumExpend.setText(bill.getSum() + " RMB");
+        itemAverageExpend.setText(bill.getAverageExpend() + " RMB");
         Button buttonCheck = view.findViewById(R.id.button_aaTool_billCheck);
         buttonCheck.setOnClickListener(new View.OnClickListener() {
             @Override
