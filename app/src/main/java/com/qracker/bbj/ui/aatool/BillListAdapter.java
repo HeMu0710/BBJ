@@ -1,6 +1,7 @@
 package com.qracker.bbj.ui.aatool;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -57,8 +58,10 @@ public class BillListAdapter extends ArrayAdapter<Bill> {
         itemTitle.setText(bill.getComment());
         if(bill.isFinished())
             itemStatus.setText("已结清");
-        else
+        else {
             itemStatus.setText("未结清");
+            itemStatus.setTextColor(0xFFFFEB3B);
+        }
         itemSumExpend.setText(bill.getSum() + " RMB");
         itemAverageExpend.setText(bill.getAverageExpend() + " RMB");
         Button buttonCheck = view.findViewById(R.id.button_aaTool_billCheck);
