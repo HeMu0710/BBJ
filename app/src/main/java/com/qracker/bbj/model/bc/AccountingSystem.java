@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.qracker.bbj.model.tool.*;
 
-public class AccountingSystem implements AddInFront<MoneyEvent> {
+public class AccountingSystem {
     private static AccountingSystem instance = new AccountingSystem();
     private ArrayList<MoneyEvent> events = new ArrayList<>();
 
