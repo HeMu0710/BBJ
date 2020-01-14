@@ -6,8 +6,13 @@ import com.google.gson.Gson;
 import com.qracker.bbj.model.bc.AccountingSystem;
 import com.qracker.bbj.model.bc.MoneyEvent;
 import com.qracker.bbj.model.bz.Bill;
+import com.qracker.bbj.model.bz.BillSystem;
 
 import java.util.Date;
+import java.util.Locale;
+import java.util.Scanner;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static org.junit.Assert.*;
 
@@ -29,10 +34,23 @@ public class ExampleUnitTest {
         bill.addMember("王泳淇",80);
         bill.addMember("唐铭聪",5);
         bill.addExpend("何牧",50);
-        System.out.println(bill.getSolution());
-        Gson gson = new Gson();
-        String json = gson.toJson(bill, Bill.class);
-        System.out.println(json);
-        Bill bill1 = gson.fromJson(json, Bill.class);
+        Bill bill1 = new Bill("寝室均摊账本");
+        bill1.addMember("何牧",50);
+        bill1.addMember("梁理维",40);
+        bill1.addMember("王泳淇",80);
+        bill1.addMember("唐铭聪",5);
+        bill1.addExpend("何牧",50);
+        Bill bill2 = new Bill("寝室均摊账本");
+        bill2.addMember("何牧",50);
+        bill2.addMember("梁理维",40);
+        bill2.addMember("王泳淇",80);
+        bill2.addMember("唐铭聪",5);
+        bill2.addExpend("何牧",50);
+        BillSystem billSystem = BillSystem.getInstance();
+        billSystem.addBill(bill);
+        billSystem.addBill(bill1);
+        billSystem.addBill(bill2);
+        bill1.getSolution();
+        billSystem.sort();
     }
 }

@@ -1,6 +1,12 @@
 package com.qracker.bbj.model.bz;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * @program: BBJ
@@ -43,5 +49,10 @@ public class BillSystem {
         newBills.add(bill);
         newBills.addAll(this.bills);
         this.bills = newBills;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void sort() {
+        this.bills.sort(Comparator.comparing(Bill::isFinished).thenComparing(Bill::getDate));
     }
 }

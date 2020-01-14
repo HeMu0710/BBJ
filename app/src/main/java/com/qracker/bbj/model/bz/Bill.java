@@ -2,9 +2,11 @@ package com.qracker.bbj.model.bz;
 
 import com.qracker.bbj.model.tool.Arith;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Bill {
     private String comment;
+    private Date date;
     private int amount = 0;
     private double scale = 0;
     private double[] expends;
@@ -23,6 +25,7 @@ public class Bill {
         this.comment = comment;
         this.isFinished = false;
         expends = new double[20];
+        date = new Date();
     }
 
     public void addMember(String name, double expend) {
@@ -179,6 +182,10 @@ public class Bill {
 
     public double getScale() {
         return this.scale;
+    }
+
+    public Date getDate() {
+        return date;
     }
 
     public String getComment() {
