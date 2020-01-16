@@ -36,7 +36,14 @@ public class MoneyEvent {
     }
 
     public String getDate() {
-        return (date.getYear() + 1900) + "/" + (date.getMonth() + 1) + "/" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
+        return (date.getYear() + 1900) + "/" + (date.getMonth() + 1) + "/" + date.getDate();
+    }
+
+    public String getTime() {
+        if(date.getMinutes() < 10)
+            return date.getHours() + ":0" + date.getMinutes();
+        else
+            return date.getHours() + ":" + date.getMinutes();
     }
 
     public int getMonth() {
@@ -63,5 +70,10 @@ public class MoneyEvent {
         this.date.setYear(year);
         this.date.setMonth(monthOfYear);
         this.date.setDate(dayOfMonth);
+    }
+
+    public void setTime(int hour, int minute) {
+        this.date.setHours(hour);
+        this.date.setMinutes(minute);
     }
 }

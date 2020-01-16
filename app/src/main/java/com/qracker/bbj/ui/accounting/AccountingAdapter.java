@@ -39,7 +39,7 @@ public class AccountingAdapter extends ArrayAdapter<MoneyEvent> {
         TextView itemDate = view.findViewById(R.id.itemDate_accounting);
         TextView itemMoney = view.findViewById(R.id.itemMoney_accounting);
         ImageView itemIcon = view.findViewById(R.id.itemIcon_accounting);
-        itemDate.setText(moneyEvent.getDate());
+        itemDate.setText(moneyEvent.getDate() + " " + moneyEvent.getTime());
         itemText.setText(moneyEvent.getComment());
         if(moneyEvent.isOut())
             itemMoney.setText("-" + moneyEvent.getMoney());
