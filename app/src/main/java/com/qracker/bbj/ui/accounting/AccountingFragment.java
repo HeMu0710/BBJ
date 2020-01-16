@@ -1,5 +1,6 @@
 package com.qracker.bbj.ui.accounting;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.qracker.bbj.R;
+import com.qracker.bbj.model.bc.MoneyEvent;
 
 public class AccountingFragment extends Fragment {
 
@@ -48,7 +50,12 @@ public class AccountingFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                PopupWindow popupWindow = new PopupWindow(100,100);
+                MoneyEvent moneyEvent = (MoneyEvent) adapter.getItem(position);
+                AlertDialog.Builder builder = new AlertDialog.Builder(parent.getContext());
+                View dialogView = getLayoutInflater().inflate(R.layout.dialog_accounting,parent,false);
+                builder.setView(dialogView);
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         });
     }
