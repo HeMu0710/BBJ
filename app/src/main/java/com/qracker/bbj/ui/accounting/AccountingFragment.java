@@ -31,6 +31,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.qracker.bbj.R;
 import com.qracker.bbj.model.bc.MoneyEvent;
+import com.qracker.bbj.model.tool.Arith;
 
 public class AccountingFragment extends Fragment {
 
@@ -53,7 +54,7 @@ public class AccountingFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ListView listView = view.findViewById(R.id.listView_accounting);
-        Adapter adapter = listView.getAdapter();
+        AccountingAdapter adapter = (AccountingAdapter) listView.getAdapter();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -108,9 +109,13 @@ public class AccountingFragment extends Fragment {
                 });
 
                 builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         moneyEvent.setComment(String.valueOf(itemComment.getText()));
+                        moneyEvent.setMoney(Arith.round(Double.valueOf(String.valueOf(itemMoney.getText())), 2));
+                        moneyEvent.setOut(!inOrOutSwitch.isChecked());
+                        adapter.notifyDataSetChanged();
                     }
                 });
                 builder.setNegativeButton("取消", null);

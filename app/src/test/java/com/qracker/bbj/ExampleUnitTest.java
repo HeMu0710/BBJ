@@ -7,6 +7,7 @@ import com.qracker.bbj.model.bc.AccountingSystem;
 import com.qracker.bbj.model.bc.MoneyEvent;
 import com.qracker.bbj.model.bz.Bill;
 import com.qracker.bbj.model.bz.BillSystem;
+import com.qracker.bbj.model.tool.Read;
 
 import java.util.Date;
 import java.util.Locale;
@@ -28,29 +29,8 @@ public class ExampleUnitTest {
 //    }
     @Test
     public void test() {
-        Bill bill = new Bill("寝室均摊账本");
-        bill.addMember("何牧",50);
-        bill.addMember("梁理维",40);
-        bill.addMember("王泳淇",80);
-        bill.addMember("唐铭聪",5);
-        bill.addExpend("何牧",50);
-        Bill bill1 = new Bill("寝室均摊账本");
-        bill1.addMember("何牧",50);
-        bill1.addMember("梁理维",40);
-        bill1.addMember("王泳淇",80);
-        bill1.addMember("唐铭聪",5);
-        bill1.addExpend("何牧",50);
-        Bill bill2 = new Bill("寝室均摊账本");
-        bill2.addMember("何牧",50);
-        bill2.addMember("梁理维",40);
-        bill2.addMember("王泳淇",80);
-        bill2.addMember("唐铭聪",5);
-        bill2.addExpend("何牧",50);
-        BillSystem billSystem = BillSystem.getInstance();
-        billSystem.addBill(bill);
-        billSystem.addBill(bill1);
-        billSystem.addBill(bill2);
-        bill1.getSolution();
-        billSystem.sort();
+        String date = "2020/1/17";
+        String time = "0:16";
+        int y = Read.readYear(date);
     }
 }
