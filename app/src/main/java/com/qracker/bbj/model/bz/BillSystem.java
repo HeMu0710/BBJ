@@ -55,4 +55,11 @@ public class BillSystem {
     public void sort() {
         this.bills.sort(Comparator.comparing(Bill::isFinished).thenComparing(Bill::getDate));
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public ArrayList<Transfer> getSolution(int index) {
+        ArrayList<Transfer> solutions = bills.get(index).getSolution();
+        sort();
+        return solutions;
+    }
 }

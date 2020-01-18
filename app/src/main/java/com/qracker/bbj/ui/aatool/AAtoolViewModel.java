@@ -1,5 +1,8 @@
 package com.qracker.bbj.ui.aatool;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -13,6 +16,7 @@ public class AAtoolViewModel extends ViewModel {
 
     private BillSystem billSystem;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public AAtoolViewModel() {
         billSystem = BillSystem.getInstance();
         Bill bill = new Bill("寝室均摊账本");
@@ -32,6 +36,7 @@ public class AAtoolViewModel extends ViewModel {
         billSystem.addBill(bill);
         billSystem.addBill(bill1);
         billSystem.addBill(bill2);
+        billSystem.getSolution(1);
     }
 
     public ArrayList<Bill> getBillList() {
