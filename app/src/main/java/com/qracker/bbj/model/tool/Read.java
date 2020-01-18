@@ -18,4 +18,42 @@ public class Read {
         return Integer.valueOf(date.substring(0, 4));
     }
 
+    public static int readMonth(String date) {
+        int n;
+        String monthAndDay = date.substring(5);
+        n = 0;
+        while(monthAndDay.charAt(n) != '/')
+            n ++;
+        return Integer.valueOf(monthAndDay.substring(0, n));
+    }
+
+    public static int readDay(String date) {
+        int n;
+        String monthAndDay = date.substring(5);
+        n = monthAndDay.length() - 1;
+        while (monthAndDay.charAt(n) != '/')
+            n --;
+        return Integer.valueOf(monthAndDay.substring(n + 1));
+    }
+
+    public static int readHour(String time) {
+        /**
+        * @Description: 传参实例 23:24
+        * @Param: [time]
+        * @return: int
+        * @Author: HeMu-qracker
+        * @Date: 2020/1/18
+        */
+        int n = 0;
+        while(time.charAt(n) != ':')
+            n ++;
+        return Integer.valueOf(time.substring(0, n));
+    }
+
+    public static int readMinute(String time) {
+        int n = time.length() - 1;
+        while(time.charAt(n) != ':')
+            n --;
+        return Integer.valueOf(time.substring(n + 1));
+    }
 }

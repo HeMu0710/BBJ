@@ -29,8 +29,12 @@ public class ExampleUnitTest {
 //    }
     @Test
     public void test() {
-        String date = "2020/1/17";
-        String time = "0:16";
+        String date = "2020/12/7";
+        String time = "22:56";
         int y = Read.readYear(date);
+        int m = Read.readMonth(date);
+        int d = Read.readDay(date);
+        int h = Read.readHour(time);
+        int min = Read.readMinute(time);
     }
 }

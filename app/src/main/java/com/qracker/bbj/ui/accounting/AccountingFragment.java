@@ -32,6 +32,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.qracker.bbj.R;
 import com.qracker.bbj.model.bc.MoneyEvent;
 import com.qracker.bbj.model.tool.Arith;
+import com.qracker.bbj.model.tool.Read;
 
 public class AccountingFragment extends Fragment {
 
@@ -115,6 +116,10 @@ public class AccountingFragment extends Fragment {
                         moneyEvent.setComment(String.valueOf(itemComment.getText()));
                         moneyEvent.setMoney(Arith.round(Double.valueOf(String.valueOf(itemMoney.getText())), 2));
                         moneyEvent.setOut(!inOrOutSwitch.isChecked());
+                        String date = String.valueOf(datePicker.getText());
+                        String time = String.valueOf(timePicker.getText());
+                        moneyEvent.setDate(Read.readYear(date), Read.readMonth(date), Read.readDay(date));
+                        moneyEvent.setTime(Read.readHour(time), Read.readMinute(time));
                         adapter.notifyDataSetChanged();
                     }
                 });
