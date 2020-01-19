@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.google.gson.Gson;
 import com.qracker.bbj.model.bc.AccountingSystem;
 import com.qracker.bbj.model.bc.MoneyEvent;
 

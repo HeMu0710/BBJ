@@ -121,6 +121,7 @@ public class AccountingFragment extends Fragment {
                         moneyEvent.setDate(Read.readYear(date), Read.readMonth(date), Read.readDay(date));
                         moneyEvent.setTime(Read.readHour(time), Read.readMinute(time));
                         adapter.notifyDataSetChanged();
+
                     }
                 });
                 builder.setNegativeButton("取消", null);

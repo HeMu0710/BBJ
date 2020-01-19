@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.qracker.bbj.ui.accounting.AccountingViewModel;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             fos = openFileOutput("data", MODE_PRIVATE);
             bw = new BufferedWriter(new OutputStreamWriter(fos));
-            bw.write("nmsl");
+            bw.write("nmsl,wdnmd");
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -57,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    public void save() {
+
     }
 
 }
