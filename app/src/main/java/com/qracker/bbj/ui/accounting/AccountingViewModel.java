@@ -44,4 +44,8 @@ public class AccountingViewModel extends ViewModel {
     public AccountingSystem getAccountingSystem() {
         return this.accountingSystem;
     }
+
+    public void save() {
+
+    }
 }

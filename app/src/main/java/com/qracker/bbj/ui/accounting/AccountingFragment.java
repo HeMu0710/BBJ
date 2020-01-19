@@ -29,6 +29,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.qracker.bbj.MainActivity;
 import com.qracker.bbj.R;
 import com.qracker.bbj.model.bc.MoneyEvent;
 import com.qracker.bbj.model.tool.Arith;
@@ -37,6 +38,7 @@ import com.qracker.bbj.model.tool.Read;
 public class AccountingFragment extends Fragment {
 
     private AccountingViewModel accountingViewModel;
+    private MainActivity activity = (MainActivity) getActivity().getParent();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

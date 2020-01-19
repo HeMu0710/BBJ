@@ -21,6 +21,8 @@ import java.io.OutputStreamWriter;
 
 public class MainActivity extends AppCompatActivity {
 
+    MainActivity activity = this;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+        //navController.getViewModelStoreOwner(0);
+
         BufferedWriter bw = null;
         FileOutputStream fos = null;
         try {
