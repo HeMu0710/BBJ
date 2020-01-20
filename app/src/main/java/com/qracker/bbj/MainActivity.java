@@ -7,6 +7,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.qracker.bbj.ui.accounting.AccountingViewModel;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -20,8 +21,6 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 public class MainActivity extends AppCompatActivity {
-
-    MainActivity activity = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,32 +36,31 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        //navController.getViewModelStoreOwner(0);
 
-        BufferedWriter bw = null;
-        FileOutputStream fos = null;
-        try {
-            fos = openFileOutput("data", MODE_PRIVATE);
-            bw = new BufferedWriter(new OutputStreamWriter(fos));
-            bw.write("nmsl,wdnmd");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if(bw != null) {
-                try {
-                    bw.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if(fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+//        BufferedWriter bw = null;
+//        FileOutputStream fos = null;
+//        try {
+//            fos = openFileOutput("data", MODE_PRIVATE);
+//            bw = new BufferedWriter(new OutputStreamWriter(fos));
+//            bw.write("nmsl,wdnmd");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//            if(bw != null) {
+//                try {
+//                    bw.close();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            if(fos != null) {
+//                try {
+//                    fos.close();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
     }
 
     public void save() {

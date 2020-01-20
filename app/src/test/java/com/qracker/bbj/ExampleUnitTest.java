@@ -29,12 +29,11 @@ public class ExampleUnitTest {
 //    }
     @Test
     public void test() {
-        String date = "2020/12/7";
-        String time = "22:56";
-        int y = Read.readYear(date);
-        int m = Read.readMonth(date);
-        int d = Read.readDay(date);
-        int h = Read.readHour(time);
-        int min = Read.readMinute(time);
+        AccountingSystem system = null;
+        Gson gson = new Gson();
+        String json = gson.toJson(system);
+        System.out.println(json);
+        AccountingSystem system1 = gson.fromJson(json, AccountingSystem.class);
+        System.out.println(system1);
     }
 }

@@ -1,5 +1,6 @@
 package com.qracker.bbj.ui.accounting;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Build;
@@ -29,21 +30,34 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.gson.Gson;
 import com.qracker.bbj.MainActivity;
 import com.qracker.bbj.R;
+import com.qracker.bbj.model.bc.AccountingSystem;
 import com.qracker.bbj.model.bc.MoneyEvent;
 import com.qracker.bbj.model.tool.Arith;
 import com.qracker.bbj.model.tool.Read;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.nio.CharBuffer;
+
+import static android.content.Context.MODE_PRIVATE;
+
 public class AccountingFragment extends Fragment {
 
     private AccountingViewModel accountingViewModel;
-    private MainActivity activity = (MainActivity) getActivity().getParent();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         accountingViewModel =
                 ViewModelProviders.of(getActivity()).get(AccountingViewModel.class);
+        accountingViewModel.setAccountingSystem(read());
         View root = inflater.inflate(R.layout.fragment_accounting, container, false);
         ListView listView = root.findViewById(R.id.listView_accounting);
         AccountingAdapter adapter = new AccountingAdapter(root.getContext(), R.layout.listitem_accounting,
@@ -123,7 +137,7 @@ public class AccountingFragment extends Fragment {
                         moneyEvent.setDate(Read.readYear(date), Read.readMonth(date), Read.readDay(date));
                         moneyEvent.setTime(Read.readHour(time), Read.readMinute(time));
                         adapter.notifyDataSetChanged();
-
+                        save();
                     }
                 });
                 builder.setNegativeButton("取消", null);
@@ -133,5 +147,81 @@ public class AccountingFragment extends Fragment {
                 dialog.show();
             }
         });
+    }
+
+    public void save() {
+        /**
+        * @Description: 将accountingSystem转成json字符串然后存在data文件里
+        * @Param: []
+        * @return: void
+        * @Author: HeMu-qracker
+        * @Date: 2020/1/20
+        */
+        BufferedWriter bw = null;
+        FileOutputStream fos = null;
+        try {
+            fos = getActivity().openFileOutput("data", MODE_PRIVATE);
+            bw = new BufferedWriter(new OutputStreamWriter(fos));
+            bw.write(new Gson().toJson(accountingViewModel.getAccountingSystem()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(bw != null) {
+                try {
+                    bw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public AccountingSystem read() {
+        /**
+        * @Description: 从data文件读取accountingSystem
+        * @Param: []
+        * @return: com.qracker.bbj.model.bc.AccountingSystem
+        * @Author: HeMu-qracker
+        * @Date: 2020/1/20
+        */
+        Gson gson = new Gson();
+        BufferedReader br = null;
+        FileInputStream fis = null;
+        String json = null;
+        try {
+            fis = getActivity().openFileInput("data");
+            br = new BufferedReader(new InputStreamReader(fis));
+            json = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        System.out.println(json);
+        AccountingSystem accountingSystem = gson.fromJson(json, AccountingSystem.class);
+        if(accountingSystem == null)
+            return new AccountingSystem();
+        else
+            return accountingSystem;
     }
 }

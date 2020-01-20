@@ -5,21 +5,10 @@ import java.util.ArrayList;
 import com.qracker.bbj.model.tool.*;
 
 public class AccountingSystem {
-    private static AccountingSystem instance = new AccountingSystem();
-    private ArrayList<MoneyEvent> events = new ArrayList<>();
+    private ArrayList<MoneyEvent> events;
 
-    private AccountingSystem() {
-    }
-
-    public static AccountingSystem getInstance() {
-        /**
-        * @Description: AccountingSystem应实现单例模式，此方法为获取这个单例对象。
-        * @Param: []
-        * @return: com.qracker.bbj.model.bc.AccountingSystem
-        * @Author: HeMu-qracker
-        * @Date: 2020/1/10
-        */
-        return instance;
+    public AccountingSystem() {
+         events = new ArrayList<>();
     }
 
     public ArrayList<MoneyEvent> getEvents() {
