@@ -26,7 +26,7 @@ public class AccountingSystem {
         this.events = addInFront(this.events, moneyEvent);
     }
 
-    public double getMonthlyIncome(int month) {
+    public double getMonthlyIncome(int year, int month) {
         /**
         * @Description: 获取特定月份总收入
         * @Param: [month]
@@ -37,13 +37,13 @@ public class AccountingSystem {
         double allIncome = 0;
         for (MoneyEvent me : events
              ) {
-            if (!me.isOut() && me.getMonth() == month)
+            if ((!me.isOut()) && me.getMonth() == month && me.getYear() == year)
                 allIncome = Arith.add(allIncome, me.getMoney());
         }
         return allIncome;
     }
 
-    public double getMonthlyExpend(int month) {
+    public double getMonthlyExpend(int year, int month) {
         /**
         * @Description: 获取特定月份总支出
         * @Param: [month]
@@ -54,13 +54,13 @@ public class AccountingSystem {
         double allExpand = 0;
         for (MoneyEvent me : events
              ) {
-            if (me.isOut() && me.getMonth() == month)
+            if (me.isOut() && me.getMonth() == month && me.getYear() == year)
                 allExpand = Arith.add(allExpand, me.getMoney());
         }
         return allExpand;
     }
 
-    public double getSurplus(int month) {
+    public double getSurplus(int year, int month) {
         /**
         * @Description: 获取特定月份结余，即收入减支出
         * @Param: [month]
@@ -68,7 +68,7 @@ public class AccountingSystem {
         * @Author: HeMu-qracker
         * @Date: 2020/1/10
         */
-        return Arith.sub(getMonthlyIncome(month), getMonthlyExpend(month));
+        return Arith.sub(getMonthlyIncome(year, month), getMonthlyExpend(year, month));
     }
 
     public ArrayList<MoneyEvent> addInFront(ArrayList<MoneyEvent> moneyEvents, MoneyEvent moneyEventToAdd) {

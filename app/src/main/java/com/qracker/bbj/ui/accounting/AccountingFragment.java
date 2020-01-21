@@ -145,6 +145,7 @@ public class AccountingFragment extends Fragment {
                         moneyEvent.setDate(Read.readYear(date) - 1900, Read.readMonth(date) - 1, Read.readDay(date));
                         moneyEvent.setTime(Read.readHour(time), Read.readMinute(time));
                         adapter.notifyDataSetChanged();
+                        updateCardView(getView());
                         save();
                     }
                 });
@@ -235,12 +236,13 @@ public class AccountingFragment extends Fragment {
     }
 
     public void updateCardView(View view) {
+        Date date = new Date();
         TextView surplusTextView = view.findViewById(R.id.textView_accounting_surplus);
-        surplusTextView.setText(accountingViewModel.getAccountingSystem().getSurplus(new Date().getMonth()) + "");
+        surplusTextView.setText(accountingViewModel.getAccountingSystem().getSurplus(date.getYear(), date.getMonth()) + "");
         TextView thisMonthlyExpend = view.findViewById(R.id.textView_accounting_monthlyExpend);
-        thisMonthlyExpend.setText(accountingViewModel.getAccountingSystem().getMonthlyExpend(new Date().getMonth()) + "");
+        thisMonthlyExpend.setText(accountingViewModel.getAccountingSystem().getMonthlyExpend(date.getYear(), date.getMonth()) + "");
         TextView thisMonthlyIncome = view.findViewById(R.id.textView_accounting_monthlyIncome);
-        thisMonthlyIncome.setText(accountingViewModel.getAccountingSystem().getMonthlyIncome(new Date().getMonth()) + "");
+        thisMonthlyIncome.setText(accountingViewModel.getAccountingSystem().getMonthlyIncome(date.getYear(), date.getMonth()) + "");
     }
 
     @Override

@@ -60,7 +60,7 @@
                         android:textSize="16dp"
                         android:text="本月支出"/>
                     <TextView
-                        android:id="@+id/textView_accounting_monthlyIncome"
+                        android:id="@+id/textView_accounting_monthlyExpend"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -89,7 +89,7 @@
                         android:textSize="16dp"
                         android:text="本月收入"/>
                     <TextView
-                        android:id="@+id/textView_accounting_monthlyExpend"
+                        android:id="@+id/textView_accounting_monthlyIncome"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

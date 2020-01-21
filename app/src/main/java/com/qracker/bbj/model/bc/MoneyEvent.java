@@ -50,6 +50,10 @@ public class MoneyEvent {
         return this.date.getMonth();
     }
 
+    public int getYear() {
+        return this.date.getYear();
+    }
+
     public void setMoney(double money) {
         this.money = money;
     }
