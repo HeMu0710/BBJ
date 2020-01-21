@@ -1,5 +1,7 @@
 package com.qracker.bbj.ui.aatool;
 
+import android.content.Context;
+import android.icu.util.BuddhistCalendar;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +15,15 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.gson.Gson;
 import com.qracker.bbj.R;
+import com.qracker.bbj.model.bz.BillSystem;
+
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 
 public class AAToolFragment extends Fragment {
 
@@ -30,5 +40,37 @@ public class AAToolFragment extends Fragment {
         billListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         return root;
+    }
+
+    public void save() {
+        String json = new Gson().toJson(AAtoolViewModel.getBillSystem(), BillSystem.class);
+        FileOutputStream fos = null;
+        BufferedWriter bw = null;
+        try {
+            fos = getActivity().openFileOutput("billsData", Context.MODE_PRIVATE);
+            bw = new BufferedWriter(new OutputStreamWriter(fos));
+            bw.write(json);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(bw != null) {
+                try {
+                    bw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public BillSystem read() {
+        return null;
     }
 }

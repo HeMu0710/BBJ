@@ -42,4 +42,12 @@ public class AAtoolViewModel extends ViewModel {
     public ArrayList<Bill> getBillList() {
         return this.billSystem.getBills();
     }
+
+    public BillSystem getBillSystem() {
+        return billSystem;
+    }
+
+    public void setBillSystem(BillSystem billSystem) {
+        this.billSystem = billSystem;
+    }
 }

@@ -52,7 +52,7 @@ public class BillSystem {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public void sort() {
+    private void sort() {
         this.bills.sort(Comparator.comparing(Bill::isFinished).thenComparing(Bill::getDate));
     }
 
