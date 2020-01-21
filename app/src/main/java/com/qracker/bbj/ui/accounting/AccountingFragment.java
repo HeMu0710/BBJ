@@ -46,6 +46,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.nio.CharBuffer;
+import java.util.Date;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -69,6 +70,13 @@ public class AccountingFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        /**
+        * @Description: onViewCreated()方法在onCreatView()执行之后被执行，主要可以进行各种事件的绑定。
+        * @Param: [view, savedInstanceState]
+        * @return: void
+        * @Author: HeMu-qracker
+        * @Date: 2020/1/21
+        */
         super.onViewCreated(view, savedInstanceState);
         ListView listView = view.findViewById(R.id.listView_accounting);
         AccountingAdapter adapter = (AccountingAdapter) listView.getAdapter();
@@ -134,7 +142,7 @@ public class AccountingFragment extends Fragment {
                         moneyEvent.setOut(!inOrOutSwitch.isChecked());
                         String date = String.valueOf(datePicker.getText());
                         String time = String.valueOf(timePicker.getText());
-                        moneyEvent.setDate(Read.readYear(date), Read.readMonth(date), Read.readDay(date));
+                        moneyEvent.setDate(Read.readYear(date) - 1900, Read.readMonth(date) - 1, Read.readDay(date));
                         moneyEvent.setTime(Read.readHour(time), Read.readMinute(time));
                         adapter.notifyDataSetChanged();
                         save();
@@ -147,6 +155,7 @@ public class AccountingFragment extends Fragment {
                 dialog.show();
             }
         });
+        updateCardView(view);
     }
 
     public void save() {
@@ -223,5 +232,20 @@ public class AccountingFragment extends Fragment {
             return new AccountingSystem();
         else
             return accountingSystem;
+    }
+
+    public void updateCardView(View view) {
+        TextView surplusTextView = view.findViewById(R.id.textView_accounting_surplus);
+        surplusTextView.setText(accountingViewModel.getAccountingSystem().getSurplus(new Date().getMonth()) + "");
+        TextView thisMonthlyExpend = view.findViewById(R.id.textView_accounting_monthlyExpend);
+        thisMonthlyExpend.setText(accountingViewModel.getAccountingSystem().getMonthlyExpend(new Date().getMonth()) + "");
+        TextView thisMonthlyIncome = view.findViewById(R.id.textView_accounting_monthlyIncome);
+        thisMonthlyIncome.setText(accountingViewModel.getAccountingSystem().getMonthlyIncome(new Date().getMonth()) + "");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateCardView(getView());
     }
 }
