@@ -39,6 +39,7 @@ public class AAToolFragment extends Fragment {
                 R.layout.listitem_aatool, AAtoolViewModel.getBillList());
         billListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        save();
         return root;
     }
 
@@ -47,7 +48,7 @@ public class AAToolFragment extends Fragment {
         FileOutputStream fos = null;
         BufferedWriter bw = null;
         try {
-            fos = getActivity().openFileOutput("billsData", Context.MODE_PRIVATE);
+            fos = getActivity().openFileOutput("bills", Context.MODE_PRIVATE);
             bw = new BufferedWriter(new OutputStreamWriter(fos));
             bw.write(json);
         } catch (IOException e) {
@@ -72,5 +73,11 @@ public class AAToolFragment extends Fragment {
 
     public BillSystem read() {
         return null;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        this.save();
     }
 }
