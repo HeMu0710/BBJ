@@ -26,6 +26,10 @@ public class AccountingSystem {
         this.events = addInFront(this.events, moneyEvent);
     }
 
+    public void deleteEvent(int index) {
+        this.events.remove(index);
+    }
+
     public double getMonthlyIncome(int year, int month) {
         /**
         * @Description: 获取特定月份总收入

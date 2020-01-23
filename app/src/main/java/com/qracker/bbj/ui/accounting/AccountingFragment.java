@@ -5,8 +5,11 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
@@ -20,6 +23,7 @@ import android.widget.PopupWindow;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -53,15 +57,17 @@ import static android.content.Context.MODE_PRIVATE;
 public class AccountingFragment extends Fragment {
 
     private AccountingViewModel accountingViewModel;
+    private AccountingAdapter adapter;
+    private View root;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         accountingViewModel =
                 ViewModelProviders.of(getActivity()).get(AccountingViewModel.class);
         accountingViewModel.setAccountingSystem(read());
-        View root = inflater.inflate(R.layout.fragment_accounting, container, false);
+        root = inflater.inflate(R.layout.fragment_accounting, container, false);
         ListView listView = root.findViewById(R.id.listView_accounting);
-        AccountingAdapter adapter = new AccountingAdapter(root.getContext(), R.layout.listitem_accounting,
+        this.adapter = new AccountingAdapter(root.getContext(), R.layout.listitem_accounting,
                 accountingViewModel.getAccountingList());
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -156,7 +162,32 @@ public class AccountingFragment extends Fragment {
                 dialog.show();
             }
         });
+
+        listView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+            @Override
+            public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+                menu.add(Menu.NONE, 0, 0,"删除");
+                menu.add(Menu.NONE, 1, 0,"置顶");
+            }
+        });
         updateCardView(view);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        AdapterView.AdapterContextMenuInfo menuInfo;
+        menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch (item.getItemId()) {
+            case 0:
+                //删除
+                accountingViewModel.getAccountingSystem().deleteEvent(menuInfo.position);
+                updateListView();
+                updateCardView(root);
+                break;
+            case 1:
+                break;
+        }
+        return super.onContextItemSelected(item);
     }
 
     public void save() {
@@ -243,6 +274,11 @@ public class AccountingFragment extends Fragment {
         thisMonthlyExpend.setText(accountingViewModel.getAccountingSystem().getMonthlyExpend(date.getYear(), date.getMonth()) + "");
         TextView thisMonthlyIncome = view.findViewById(R.id.textView_accounting_monthlyIncome);
         thisMonthlyIncome.setText(accountingViewModel.getAccountingSystem().getMonthlyIncome(date.getYear(), date.getMonth()) + "");
+    }
+
+    public void updateListView() {
+        adapter.notifyDataSetChanged();
+        save();
     }
 
     @Override
