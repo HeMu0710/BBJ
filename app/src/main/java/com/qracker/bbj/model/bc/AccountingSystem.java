@@ -23,11 +23,17 @@ public class AccountingSystem {
         * @Author: HeMu-qracker
         * @Date: 2020/1/10
         */
-        this.events = addInFront(this.events, moneyEvent);
+        addInFront(moneyEvent);
     }
 
     public void deleteEvent(int index) {
         this.events.remove(index);
+    }
+
+    public void moveToTop(int index) {
+        MoneyEvent event = events.get(index);
+        deleteEvent(index);
+        this.addEvent(event);
     }
 
     public double getMonthlyIncome(int year, int month) {
@@ -75,17 +81,14 @@ public class AccountingSystem {
         return Arith.sub(getMonthlyIncome(year, month), getMonthlyExpend(year, month));
     }
 
-    public ArrayList<MoneyEvent> addInFront(ArrayList<MoneyEvent> moneyEvents, MoneyEvent moneyEventToAdd) {
+    public void addInFront(MoneyEvent moneyEventToAdd) {
         /**
         * @Description: 继承自自定义接口AddInFront,实现将对象添加到list的首位
-        * @Param: [moneyEvents, moneyEventToAdd]
+        * @Param: [moneyEventToAdd]
         * @return: java.util.ArrayList<com.qracker.bbj.model.bc.MoneyEvent>
         * @Author: HeMu-qracker
         * @Date: 2020/1/13
         */
-        ArrayList<MoneyEvent> newEvents = new ArrayList<>();
-        newEvents.add(moneyEventToAdd);
-        newEvents.addAll(moneyEvents);
-        return newEvents;
+        this.events.add(0, moneyEventToAdd);
     }
 }

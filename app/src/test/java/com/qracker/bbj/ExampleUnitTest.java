@@ -9,6 +9,7 @@ import com.qracker.bbj.model.bz.Bill;
 import com.qracker.bbj.model.bz.BillSystem;
 import com.qracker.bbj.model.tool.Read;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
@@ -29,11 +30,10 @@ public class ExampleUnitTest {
 //    }
     @Test
     public void test() {
-        AccountingSystem system = null;
-        Gson gson = new Gson();
-        String json = gson.toJson(system);
-        System.out.println(json);
-        AccountingSystem system1 = gson.fromJson(json, AccountingSystem.class);
-        System.out.println(system1);
+        ArrayList<String> list = new ArrayList<>();
+        list.add("nmsl");
+        list.add(0,"wdnmd");
+        list.add(0, "nmlgb");
+        System.out.println(list);
     }
 }

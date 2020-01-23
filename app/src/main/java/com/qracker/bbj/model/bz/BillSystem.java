@@ -16,21 +16,9 @@ import java.util.Comparator;
  **/
 public class BillSystem {
     private ArrayList<Bill> bills;
-    private static BillSystem instance = new BillSystem();
 
     public BillSystem() {
         bills = new ArrayList<>();
-    }
-
-    public static BillSystem getInstance() {
-        /**
-         * @Description: 实现单例模式，获取该单例对象
-         * @Param: []
-         * @return: com.qracker.bbj.model.bz.BillSystem
-         * @Author: HeMu-qracker
-         * @Date: 2020/1/12
-         */
-        return instance;
     }
 
     public ArrayList<Bill> getBills() {
@@ -38,17 +26,11 @@ public class BillSystem {
     }
 
     public void addBill(String comment) {
-        ArrayList<Bill> newBills = new ArrayList<>();
-        newBills.add(new Bill(comment));
-        newBills.addAll(this.bills);
-        this.bills = newBills;
+        bills.add(0, new Bill(comment));
     }
 
     public void addBill(Bill bill) {
-        ArrayList<Bill> newBills = new ArrayList<>();
-        newBills.add(bill);
-        newBills.addAll(this.bills);
-        this.bills = newBills;
+        this.bills.add(0, bill);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)

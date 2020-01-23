@@ -185,6 +185,9 @@ public class AccountingFragment extends Fragment {
                 updateCardView(root);
                 break;
             case 1:
+                //置顶
+                accountingViewModel.getAccountingSystem().moveToTop(menuInfo.position);
+                updateListView();
                 break;
         }
         return super.onContextItemSelected(item);
@@ -277,6 +280,7 @@ public class AccountingFragment extends Fragment {
     }
 
     public void updateListView() {
+        adapter.notifyDataSetChanged();
         adapter.notifyDataSetChanged();
         save();
     }
