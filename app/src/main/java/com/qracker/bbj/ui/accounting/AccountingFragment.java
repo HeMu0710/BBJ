@@ -41,6 +41,8 @@ import com.qracker.bbj.model.bc.AccountingSystem;
 import com.qracker.bbj.model.bc.MoneyEvent;
 import com.qracker.bbj.model.tool.Arith;
 import com.qracker.bbj.model.tool.Read;
+import com.qracker.bbj.ui.aatool.AAToolFragment;
+import com.qracker.bbj.ui.aatool.AAtoolViewModel;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
